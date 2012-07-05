@@ -30,26 +30,34 @@ like require.js.
 
 ~~~javascript
 
-	var timer = new Timer();
+    var timer = new Timer();
+
+    // setting an interval works like window.setInterval:
+    var intervalId = timer.setInterval(someFunc, 100);
+
+    // to set the execution context, pass a context object:
+    var intervalId = timer.setInterval(someFunc, 100, someObj);
+
+    // or bind your function:
+    var intervalId = timer.setInterval(someFunc.bind(somObj), 100);
+
+    // then, in your render loop:
+    function render(){
+
+      //...
+
+      timer.update(delta); // delta needs to be in ms!
+    }
  
-     // setting an interval works like window.setInterval:
-     var intervalId = timer.setInterval(someFunc, 100);
- 
-     // to set the execution context, pass a context object:
-     var intervalId = timer.setInterval(someFunc, 100, someObj);
- 
-     // or bind your function:
-     var intervalId = timer.setInterval(someFunc.bind(somObj), 100);
- 
-     // then, in your render loop:
-     function render(){
- 
-       //...
- 
-       timer.update(delta); // delta needs to be in ms!
-     }
- 
-     // clearing also works as expected:
-     timer.clearInterval(intervalId);
+    // clearing also works as expected:
+    timer.clearInterval(intervalId);
      
 ~~~
+
+#Demo
+
+You can see how it works [over here](http://jensarps.github.com/game-timer/demo/).
+
+#Tests
+
+You can run the tests [over here](http://jensarps.github.com/game-timer/tests/SpecRunner.html).
